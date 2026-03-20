@@ -3,13 +3,13 @@
 if [[ $# != 2 ]]
 then
   echo "backup.sh target_directory_name destination_directory_name"
-  exit
+  exit 1
 fi
 
 if [[ ! -d $1 ]] || [[ ! -d $2 ]]
 then
   echo "Invalid directory path provided"
-  exit
+  exit 1
 fi
 
 targetDirectory=$1
@@ -22,10 +22,10 @@ currentTS=$(date +%s)
 
 backupFileName="backup-${currentTS}.tar.gz"
 
-origAbsPath=`pwd`
+origAbsPath=$(pwd)
 
 cd $destinationDirectory
-destDirAbsPath=`pwd`
+destDirAbsPath=$(pwd)
 
 cd $origAbsPath
 cd $targetDirectory
@@ -42,6 +42,12 @@ do
     toBackup+=("$file")
   fi
 done
+
+if [[ ${#toBackup[@]} == 0 ]]
+then
+  echo "No files to back up"
+  exit 1
+fi
 
 tar -czvf  $backupFileName "${toBackup[@]}"
 
