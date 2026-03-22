@@ -1,20 +1,16 @@
-# bash-backup-script
+## Incremental Backup Utility
 
-This tool parses system logs to generate a comprehensive audit of user activity. It tracks which users are active on specific machines within a defined time window and calculates the total duration of completed sessions.
+A robust bash utility that automates daily backups by identifying and archiving the files modified within the last 24 hours.
 
-## Core functionality
-Chronological audit of machine logins & session durations.
+### Core functionality
+Automated, timestamped archiving of modified system files.
 
-## Key enhancements
-Audit logic - tracks historical state to show everyone who accessed the system
-Duration tracking - implemented to report total active time per user
-Error handling - uses try-except blocks and collections defualtDict module to handle dirty data
-Formatted output - generated a structured .txt report 
+### Key enhancements
+**Input validation:** script validates directory paths and returns non-zero value exit codes on failure  
+**Array processing:** leverages arrays for safe handling of filenames containing spaces and special characters
 
-## Usage
-python3 script.py
-Input: events.csv | Output: user_access_report.txt
+### Usage
+'./backup.sh <target_directory> <destination_directory>'
 
-## Background
-This project originated as final assignments in the Google IT Automation professional certificates on Coursera
-  Note: this version have been significantly refactored and optimized.
+### Background
+This project originated as final assignment in the IBM Shell Scripting professional certificate on Coursera.
